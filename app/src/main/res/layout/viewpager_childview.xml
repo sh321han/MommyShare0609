@@ -5,7 +5,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:id="@+id/pager_image"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

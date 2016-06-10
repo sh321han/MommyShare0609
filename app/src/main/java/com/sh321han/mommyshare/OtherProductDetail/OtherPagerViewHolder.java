@@ -1,6 +1,5 @@
 package com.sh321han.mommyshare.OtherProductDetail;
 
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,7 +14,7 @@ import com.sh321han.mommyshare.data.ProductDetailData;
 public class OtherPagerViewHolder extends RecyclerView.ViewHolder {
 
     private static final String MOMMYSHARE_SERVER = "http://52.79.57.157:3000";
-    PagerAdapter mAdapter;
+    OtherPagerAdapter mAdapter;
     ViewPager pager;
 //    String data;
     ProductDetailData data;
@@ -28,6 +27,7 @@ public class OtherPagerViewHolder extends RecyclerView.ViewHolder {
 
         mAdapter = new OtherPagerAdapter(itemView.getContext());
         pager.setAdapter(mAdapter);
+//        pager.setAdapter(mAdapter);
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -47,11 +47,20 @@ public class OtherPagerViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setData(ProductDetailData data) {
-        this.data = data;
+//    public void setData(ProductDetailData data) {
+//        this.data = data;
+//
+//        pager.setAdapter(mAdapter);
+//    }
 
+    public void setData(ProductDetailData item) {
+   //     Glide.with(imageView.getContext()).load(MOMMYSHARE_SERVER + data.getPicture_path() + data.getPicture_name().get(position)).into(imageView);
 
-
-
+        mAdapter.addData(item);
+        mAdapter.notifyDataSetChanged();
+/*
+        pager.setAdapter(mAdapter);
+*/
     }
+
 }

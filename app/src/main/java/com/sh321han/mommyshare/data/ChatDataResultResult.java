@@ -1,13 +1,13 @@
 package com.sh321han.mommyshare.data;
 
 public class ChatDataResultResult {
-    private String reg_date;
-    private String receiver_id;
-    private boolean isread;
-    private int message_id;
-    private String _id;
-    private String message;
-    private String sender_id;
+    private String reg_date;    //메세지 작성 날짜
+    private String receiver_id;   //받은 사람 아이디
+    private boolean isread;     //읽음, 안읽음
+    private int message_id;     //서버 데이터베이스 메시지 번호
+    private String _id;     //안씀
+    private String message;    //메세지 내용
+    private String sender_id;   //보낸 사람 아이디
 
     public String getReg_date() {
         return this.reg_date;

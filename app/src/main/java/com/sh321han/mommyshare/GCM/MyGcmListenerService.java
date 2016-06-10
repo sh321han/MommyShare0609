@@ -29,14 +29,11 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.sh321han.mommyshare.Main.MainActivity;
-import com.sh321han.mommyshare.Manager.DataConstant;
 import com.sh321han.mommyshare.Manager.DataManager;
 import com.sh321han.mommyshare.Manager.NetworkManager;
 import com.sh321han.mommyshare.R;
 import com.sh321han.mommyshare.User;
 import com.sh321han.mommyshare.data.ChatDataResult;
-import com.sh321han.mommyshare.data.ChatDataResultResult;
-import com.sh321han.mommyshare.data.ChatMessage;
 
 import java.io.IOException;
 
@@ -79,13 +76,13 @@ public class MyGcmListenerService extends GcmListenerService {
                     ChatDataResult result = NetworkManager.getInstance().getMessageSync(lastDate);
                     String notiMessage = null;
                     User u = null;
-                    for (ChatDataResultResult m : result.getResult()) {
-                        long id = DataManager.getInstance().getUserTableId(m.sender);
-                        DataManager.getInstance().addChatMessage(id, DataConstant.ChatTable.TYPE_RECEIVE, m.message, m.date);
-                        notiMessage = m.sender.userName + ":" + m.message;
-                        u = m.sender;
-                        serverid = id;
-                    }
+//                    for (ChatDataResultResult m : result.getResult()) {
+//                        long id = DataManager.getInstance().getUserTableId(m.sender);
+//                        DataManager.getInstance().addChatMessage(id, DataConstant.ChatTable.TYPE_RECEIVE, m.message, m.date);
+//                        notiMessage = m.sender.userName + ":" + m.message;
+//                        u = m.sender;
+//                        serverid = id;
+//                    }
                     Intent intent = new Intent(ACTION_CHAT);
                     intent.putExtra(EXTRA_SENDER_ID, serverid);
                     LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);

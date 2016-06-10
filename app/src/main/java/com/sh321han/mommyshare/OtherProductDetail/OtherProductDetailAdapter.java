@@ -1,5 +1,6 @@
 package com.sh321han.mommyshare.OtherProductDetail;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,14 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
 
     ProductDetailData item = null;
 //    OtherPagerAdapter mAdapter = new OtherPagerAdapter();
+
+
+
+    //test
+    ViewPager mPager;
+    OtherPagerAdapter moAdapter;
+
+
 
 
     OtherWriteViewHolder.OnClickButtonListener mListener;
@@ -67,6 +76,13 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
         switch (viewType) {
             case VIEW_TYPE_PAGER :
                 view = inflater.inflate(R.layout.view_other_product_detail_vp, parent, false);
+
+
+       /*         moAdapter= new OtherPagerAdapter(parent.getContext());
+                mPager=(ViewPager)view.findViewById(R.id.pager);
+                mPager.setAdapter(moAdapter);*/
+
+
                 return new OtherPagerViewHolder(view);
             case VIEW_TYPE_LENDER :
                 view = inflater.inflate(R.layout.view_other_product_detail_lender, parent, false);
@@ -91,7 +107,9 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case VIEW_TYPE_PAGER :
-                ((OtherPagerViewHolder)holder).setData(item);
+
+               ((OtherPagerViewHolder)holder).setData(item);
+
                 break;
             case VIEW_TYPE_LENDER:
                 ((LenderViewHolder) holder).setData(item);
