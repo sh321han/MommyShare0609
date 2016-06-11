@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -243,12 +242,13 @@ public class WriteLocationActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id) {
-
-            case R.id.btn_ok:
-                Toast.makeText(WriteLocationActivity.this, "완료", Toast.LENGTH_LONG).show();
-                break;
-        }
+//        switch (id) {
+//
+//            case R.id.btn_ok:
+//                Toast.makeText(WriteLocationActivity.this, "완료", Toast.LENGTH_LONG).show();
+//
+//                break;
+//        }
         return super.onOptionsItemSelected(item);
     }
 }

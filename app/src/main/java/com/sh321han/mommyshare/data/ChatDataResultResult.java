@@ -1,5 +1,7 @@
 package com.sh321han.mommyshare.data;
 
+import com.sh321han.mommyshare.User;
+
 public class ChatDataResultResult {
     private String reg_date;    //메세지 작성 날짜
     private String receiver_id;   //받은 사람 아이디
@@ -7,7 +9,8 @@ public class ChatDataResultResult {
     private int message_id;     //서버 데이터베이스 메시지 번호
     private String _id;     //안씀
     private String message;    //메세지 내용
-    private String sender_id;   //보낸 사람 아이디
+//    private String sender_id;   //보낸 사람 아이디
+    public User sender;
 
     public String getReg_date() {
         return this.reg_date;
@@ -57,11 +60,11 @@ public class ChatDataResultResult {
         this.message = message;
     }
 
-    public String getSender_id() {
-        return this.sender_id;
-    }
-
-    public void setSender_id(String sender_id) {
-        this.sender_id = sender_id;
-    }
+//    public String getSender_id() {
+//        return this.sender_id;
+//    }
+//
+//    public void setSender_id(String sender_id) {
+//        this.sender_id = sender_id;
+//    }
 }

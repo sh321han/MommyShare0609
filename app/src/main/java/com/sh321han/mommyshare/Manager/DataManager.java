@@ -36,7 +36,7 @@ public class DataManager extends SQLiteOpenHelper {
                 DataConstant.ChatUserTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 DataConstant.ChatUserTable.COLUMN_SERVER_USER_ID + " INTEGER," +
                 DataConstant.ChatUserTable.COLUMN_NAME + " TEXT," +
-                DataConstant.ChatUserTable.COLUMN_EMAIL + " TEXT," +
+//                DataConstant.ChatUserTable.COLUMN_EMAIL + " TEXT," +
                 DataConstant.ChatUserTable.COLUMN_LAST_MESSAGE_ID + " INTEGER);";
         db.execSQL(query);
 
@@ -79,7 +79,7 @@ public class DataManager extends SQLiteOpenHelper {
         values.clear();
         values.put(DataConstant.ChatUserTable.COLUMN_SERVER_USER_ID, user.id);
         values.put(DataConstant.ChatUserTable.COLUMN_NAME, user.userName);
-        values.put(DataConstant.ChatUserTable.COLUMN_EMAIL, user.email);
+//        values.put(DataConstant.ChatUserTable.COLUMN_EMAIL, user.email);
         return db.insert(DataConstant.ChatUserTable.TABLE_NAME, null, values);
     }
 
@@ -132,7 +132,7 @@ public class DataManager extends SQLiteOpenHelper {
     }
 
     public Cursor getChatUserList() {
-        String[] columns = {DataConstant.ChatUserTable._ID, DataConstant.ChatUserTable.COLUMN_SERVER_USER_ID, DataConstant.ChatUserTable.COLUMN_NAME, DataConstant.ChatUserTable.COLUMN_EMAIL};
+        String[] columns = {DataConstant.ChatUserTable._ID, DataConstant.ChatUserTable.COLUMN_SERVER_USER_ID, DataConstant.ChatUserTable.COLUMN_NAME};
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(DataConstant.ChatUserTable.TABLE_NAME, columns, null, null, null, null, null);
         return c;

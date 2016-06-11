@@ -22,7 +22,7 @@
         android:layout_height="48dp"
         android:id="@+id/btn_setpresentLoc"
         android:layout_alignParentBottom="true"
-        android:text="버튼"
+        android:text="완료"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

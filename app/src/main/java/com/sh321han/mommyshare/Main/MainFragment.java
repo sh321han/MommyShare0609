@@ -79,7 +79,7 @@ public class MainFragment extends Fragment {
         mAdapter.setOnHeartClickListener(new MainProductViewHolder.OnHeartClickListener() {
             @Override
             public void onHeartClick(View view, MainProduct product) {
-                Toast.makeText(getContext(), "ddd", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "찜", Toast.LENGTH_LONG).show();
 
                 NetworkManager.getInstance().Keep(product.get_id(), member_id, new NetworkManager.OnResultListener<KeepData>() {
                     @Override

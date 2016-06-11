@@ -19,7 +19,7 @@
             android:id="@+id/spinner1"
             android:entries="@array/category_item"
             android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <Spinner
             android:layout_width="120dp"

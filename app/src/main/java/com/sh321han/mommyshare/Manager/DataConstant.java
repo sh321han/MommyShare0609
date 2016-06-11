@@ -10,7 +10,7 @@ public class DataConstant {
         public static final String TABLE_NAME = "chat_user_table";
         public static final String COLUMN_SERVER_USER_ID = "sid";
         public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_EMAIL = "email";
+//        public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_LAST_MESSAGE_ID = "last_message";
     }
 
@@ -23,5 +23,7 @@ public class DataConstant {
         public static final String COLUMN_TYPE = "type";
         public static final String COLUMN_MESSAGE = "message";
         public static final String COLUMN_DATE = "date_added";
+
+
     }
 }

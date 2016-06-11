@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.sh321han.mommyshare.Chatting.ChattingActivity;
 import com.sh321han.mommyshare.MyProductList.MyProductListActivity;
@@ -117,12 +116,12 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.btn_search:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment()).commit();
                 break;
             case R.id.btn_chat:
-                Toast.makeText(MainActivity.this, "chat", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(MainActivity.this, ChattingActivity.class);
-                startActivity(i);
+//                Toast.makeText(MainActivity.this, "chat", Toast.LENGTH_LONG).show();
+//                Intent i = new Intent(MainActivity.this, ChattingActivity.class);
+//                startActivity(i);
                 break;
         }
         return super.onOptionsItemSelected(item);
