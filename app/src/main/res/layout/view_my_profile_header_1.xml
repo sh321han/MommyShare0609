@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="191dp"
+    android:background="@drawable/y_pro_bg">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:id="@+id/image_my_profile"
-        android:src="@mipmap/ic_launcher"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="27dp"
+        android:src="@mipmap/ic_launcher" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="게시글보기"
-        android:id="@+id/btn_post"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="55dp"/>
+        android:id="@+id/profile_name"
+        android:text="asdfasdf"
+        android:layout_below="@+id/image_my_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="찜목록보기"
+        android:id="@+id/btn_list"
+        android:layout_width="180dp"
+        android:layout_height="61dp"
+
+
+        android:background="@drawable/list_v_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
         android:id="@+id/btn_wish"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="55dp"/>
-</FrameLayout>
+        android:layout_width="180dp"
+        android:layout_height="61dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btn_list"
+        android:layout_toEndOf="@+id/btn_list"
+        android:background="@drawable/chat_btn"/>
+</RelativeLayout>

@@ -32,5 +32,23 @@ public class PropertyManager {
 	public String getRegistrationToken() {
 		return mPrefs.getString(REG_ID, "");
 	}
-	
+
+	private Double xloca = 0.0;
+	private Double yloca = 0.0;
+
+	public void setXloca(Double longitude){
+		xloca = longitude;
+	}
+
+	public void setYloca(Double latitude){
+		yloca = latitude;
+	}
+
+	public Double getXloca() {
+		return xloca;
+	}
+
+	public Double getYloca() {
+		return yloca;
+	}
 }

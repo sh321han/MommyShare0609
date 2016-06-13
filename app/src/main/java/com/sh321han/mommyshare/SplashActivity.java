@@ -20,6 +20,7 @@ import com.sh321han.mommyshare.GCM.RegistrationIntentService;
 import com.sh321han.mommyshare.Main.MainActivity;
 import com.sh321han.mommyshare.Manager.NetworkManager;
 import com.sh321han.mommyshare.Manager.PropertyManager;
+import com.sh321han.mommyshare.OtherProductDetail.OtherProductDetailAdapter;
 import com.sh321han.mommyshare.data.LoginResult;
 
 import java.io.IOException;
@@ -27,6 +28,8 @@ import java.io.IOException;
 import okhttp3.Request;
 
 public class SplashActivity extends AppCompatActivity {
+
+    OtherProductDetailAdapter mAdapter;
 
     Handler mHandler = new Handler(Looper.getMainLooper());
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -37,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        mAdapter = new OtherProductDetailAdapter();
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -88,7 +92,12 @@ public class SplashActivity extends AppCompatActivity {
             NetworkManager.getInstance().login(this, token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<LoginResult>() {
                 @Override
                 public void onSuccess(Request request, LoginResult result) {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                    i.putExtra("name", result.getResult().getName());
+                    startActivity(i);
+//                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                    Log.d("나와라","나왔다 : " + result.getResult().getName());
+//                    mAdapter.addName(result);
                     finish();
                 }
 

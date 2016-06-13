@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sh321han.mommyshare.R;
+import com.sh321han.mommyshare.data.LoginResult;
 import com.sh321han.mommyshare.data.ProductReviewData;
 
 /**
@@ -15,6 +16,9 @@ public class OtherReviewViewHolder extends RecyclerView.ViewHolder {
     ProductReviewData data;
     ImageView profileView;
     TextView nameView, timeView, reviewView;
+    LoginResult result;
+
+
 
 
     public OtherReviewViewHolder(View itemView) {
@@ -27,10 +31,16 @@ public class OtherReviewViewHolder extends RecyclerView.ViewHolder {
 
     public void setData(ProductReviewData data) {
         this.data = data;
-
+//        this.result=result;
+//        nameView.setText(result.getResult().getName());
         timeView.setText(data.getReg_date().substring(0,10));
         reviewView.setText(data.getContent());
-
-
     }
+
+    public void setName(LoginResult result) {
+        this.result = result;
+        nameView.setText(result.getResult().getName());
+    }
+
+
 }

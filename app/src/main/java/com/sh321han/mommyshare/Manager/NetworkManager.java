@@ -44,6 +44,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.JavaNetCookieJar;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -253,9 +255,10 @@ public class NetworkManager {
     private static final String PRODUCT_WRITE_URL = MOMMYSHARE_SERVER + "/product/write";
 
     public Request ProductWrite(double longitude, double latitude, String name, String category,
-                                int rent_fee, int rent_deposit, int min_rent_period, int max_rent_period, String content,
+                                int rent_fee, int rent_deposit, int min_rent_period, int max_rent_period, String content, List<File> pictures,
                                 OnResultListener<WriteData> listener) {
 
+        MultipartBody.Builder myBuilder = new MultipartBody.Builder();
         RequestBody body = new FormBody.Builder()
                 .add("name", name)
                 .add("category", category)
@@ -267,6 +270,10 @@ public class NetworkManager {
                 .add("longitude", longitude + "")
                 .add("latitude", latitude + "")
                 .build();
+
+        for(int i = 0; i < pictures.size(); i++)
+            myBuilder.addFormDataPart("pictures", pictures.get(i).getName(),
+                    RequestBody.create(MediaType.parse("image/jpeg"), pictures.get(i)));
 
 
         Request request = new Request.Builder()

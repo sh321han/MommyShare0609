@@ -3,6 +3,7 @@ package com.sh321han.mommyshare.Write;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,10 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,19 +32,28 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.sh321han.mommyshare.GoogleMap.AddressInfo;
+import com.sh321han.mommyshare.Manager.NetworkManager;
+import com.sh321han.mommyshare.Manager.PropertyManager;
 import com.sh321han.mommyshare.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 public class WriteLocationActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks,
         OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,
+
+        GoogleMap.OnMapLongClickListener,
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnCameraChangeListener,
         GoogleMap.OnMarkerDragListener {
 
     GoogleApiClient mClient;
-    Button btn_setPresentLoc;
+    TextView btn_setPresentLoc;
     double locX, locY;
     public static final String RESULT_LOCX = "result_locX";
     public static final String RESULT_LOCY = "result_locY";
@@ -56,6 +65,9 @@ public class WriteLocationActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_write_location);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.parseColor("#f25252"));
+        getSupportActionBar().setTitle("대여 가능 장소 입력");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         mClient = new GoogleApiClient.Builder(this)
@@ -64,13 +76,13 @@ public class WriteLocationActivity extends AppCompatActivity implements
                 .enableAutoManage(this, this)
                 .addConnectionCallbacks(this)
                 .build();
-        SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+        final SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapAsync(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_dialog_map);
 
-        btn_setPresentLoc = (Button) findViewById(R.id.btn_setpresentLoc);
+        btn_setPresentLoc = (TextView) findViewById(R.id.btn_ok);
 
         btn_setPresentLoc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +134,8 @@ public class WriteLocationActivity extends AppCompatActivity implements
         mMap.setOnInfoWindowClickListener(this);
         mMap.setOnCameraChangeListener(this);
         mMap.setOnMarkerDragListener(this);
+//        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
     }
 
     @Override
@@ -157,6 +171,13 @@ public class WriteLocationActivity extends AppCompatActivity implements
 //        addMarker(latLng.latitude, latLng.longitude);
 //    }
 
+//    @Override
+//    public void onMapClick(LatLng latLng) {
+//        addMarker(latLng.latitude,latLng.latitude);
+//        Toast.makeText(this,latLng.latitude + latLng.latitude +"",Toast.LENGTH_SHORT).show();
+//        PropertyManager.getInstance().setXloca(latLng.latitude);
+//        PropertyManager.getInstance().setYloca(latLng.latitude);
+//    }
     Marker currentMarker = null;
 
     private void addMarker(double lat, double lng) {
@@ -165,16 +186,35 @@ public class WriteLocationActivity extends AppCompatActivity implements
             options.position(new LatLng(lat, lng));
             options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
             options.anchor(0.5f, 1f);
-//        options.title("MyMarker");
-//        options.snippet("marker description");
-            options.draggable(true);
             currentMarker = mMap.addMarker(options);
+
+        options.title("MyMarker");
+        options.snippet("marker description");
+            options.draggable(true);
+            Marker m = mMap.addMarker(options);
         } else {
-            currentMarker.setPosition(new LatLng(lat, lng));
+            MarkerOptions option = new MarkerOptions();
+            option.position(new LatLng(lat,lng));
+            option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+            option.anchor(0.5f,1f);
+            currentMarker = mMap.addMarker(option);
+
+
+
         }
 
 
-    }
+        MarkerOptions options = new MarkerOptions();
+        options.position(new LatLng(lat, lng));
+        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        options.anchor(0.5f, 1f);
+        //options.title("MyMarker");
+        //options.snippet("marker description");
+        options.draggable(true);
+        Marker m = mMap.addMarker(options);
+
+        }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -185,8 +225,8 @@ public class WriteLocationActivity extends AppCompatActivity implements
         displayMessage(location);
         addMarker(location.getLatitude(), location.getLongitude());
         LocationRequest request = new LocationRequest();
-        request.setInterval(10000);
-        request.setFastestInterval(5000);
+//        request.setInterval(10000);
+//        request.setFastestInterval(5000);
         request.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         LocationServices.FusedLocationApi.requestLocationUpdates(mClient, request, mListener);
     }
@@ -200,9 +240,27 @@ public class WriteLocationActivity extends AppCompatActivity implements
 
     private void displayMessage(Location location) {
         if (location != null) {
+            NetworkManager.getInstance().getTMapReverseGeocoding(this, location.getLatitude(), location.getLongitude(), new NetworkManager.OnResultListener<AddressInfo>() {
+
+                @Override
+                public void onSuccess(Request request, AddressInfo result) {
+                    Toast.makeText(WriteLocationActivity.this,result.fullAddress,Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFail(Request request, IOException exception) {
+
+                }
+
+            });
+
             moveMap(location.getLatitude(), location.getLongitude(), 15f);
         }
     }
+
+
+
+
 
     private void moveMap(double lat, double lng, float zoom) {
         CameraPosition position = new CameraPosition.Builder()
@@ -232,16 +290,17 @@ public class WriteLocationActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.location, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.location, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//
 //        switch (id) {
 //
 //            case R.id.btn_ok:
@@ -249,7 +308,17 @@ public class WriteLocationActivity extends AppCompatActivity implements
 //
 //                break;
 //        }
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
+//    }
+
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        addMarker(latLng.latitude,latLng.latitude);
+        Toast.makeText(this,latLng.latitude + latLng.latitude +"",Toast.LENGTH_SHORT).show();
+        PropertyManager.getInstance().setXloca(latLng.latitude);
+        PropertyManager.getInstance().setYloca(latLng.latitude);
+
     }
 }
 

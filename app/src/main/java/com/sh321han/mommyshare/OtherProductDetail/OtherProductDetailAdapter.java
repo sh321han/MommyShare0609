@@ -7,17 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sh321han.mommyshare.R;
+import com.sh321han.mommyshare.data.LoginResult;
 import com.sh321han.mommyshare.data.ProductDetailData;
 
 /**
  * Created by Tacademy on 2016-05-23.
  */
-public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     ProductDetailData item = null;
-//    OtherPagerAdapter mAdapter = new OtherPagerAdapter();
+    LoginResult item2 = null;
 
+//    OtherPagerAdapter mAdapter = new OtherPagerAdapter();
 
 
     //test
@@ -25,20 +27,24 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
     OtherPagerAdapter moAdapter;
 
 
-
-
     OtherWriteViewHolder.OnClickButtonListener mListener;
-    public void setClickButtonListener(OtherWriteViewHolder.OnClickButtonListener listener){
-        mListener=listener;
+
+    public void setClickButtonListener(OtherWriteViewHolder.OnClickButtonListener listener) {
+        mListener = listener;
     }
 
-    public void clear(){
+    public void clear() {
         item = new ProductDetailData();
         notifyDataSetChanged();
     }
 
     public void set(ProductDetailData data) {
         item = data;
+        notifyDataSetChanged();
+    }
+
+    public void addName(LoginResult result) {
+        item2 = result;
         notifyDataSetChanged();
     }
 
@@ -62,7 +68,7 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
             return VIEW_TYPE_DESC;
         } else if (position == 3) {
             return VIEW_TYPE_DETAIL;
-        } else if (position == 4){
+        } else if (position == 4) {
             return VIEW_TYPE_WRITE;
         } else {
             return VIEW_TYPE_REVIEW;
@@ -74,7 +80,7 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = null;
         switch (viewType) {
-            case VIEW_TYPE_PAGER :
+            case VIEW_TYPE_PAGER:
                 view = inflater.inflate(R.layout.view_other_product_detail_vp, parent, false);
 
 
@@ -84,19 +90,19 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
 
 
                 return new OtherPagerViewHolder(view);
-            case VIEW_TYPE_LENDER :
+            case VIEW_TYPE_LENDER:
                 view = inflater.inflate(R.layout.view_other_product_detail_lender, parent, false);
                 return new LenderViewHolder(view);
-            case VIEW_TYPE_DESC :
+            case VIEW_TYPE_DESC:
                 view = inflater.inflate(R.layout.view_other_product_detail_desc, parent, false);
                 return new OtherDescViewHolder(view);
             case VIEW_TYPE_DETAIL:
                 view = inflater.inflate(R.layout.view_other_product_detail_dt, parent, false);
                 return new OtherDetailViewHolder(view);
-            case VIEW_TYPE_WRITE :
+            case VIEW_TYPE_WRITE:
                 view = inflater.inflate(R.layout.view_other_product_detail_write, parent, false);
                 return new OtherWriteViewHolder(view);
-            case VIEW_TYPE_REVIEW :
+            case VIEW_TYPE_REVIEW:
                 view = inflater.inflate(R.layout.view_other_product_detail_review, parent, false);
                 return new OtherReviewViewHolder(view);
         }
@@ -106,10 +112,8 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
-            case VIEW_TYPE_PAGER :
-
-               ((OtherPagerViewHolder)holder).setData(item);
-
+            case VIEW_TYPE_PAGER:
+                ((OtherPagerViewHolder) holder).setData(item);
                 break;
             case VIEW_TYPE_LENDER:
                 ((LenderViewHolder) holder).setData(item);
@@ -120,11 +124,14 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
             case VIEW_TYPE_DETAIL:
                 ((OtherDetailViewHolder) holder).setData(item);
                 break;
-            case VIEW_TYPE_WRITE :
-                ((OtherWriteViewHolder)holder).setButtonClickListener(mListener);
+            case VIEW_TYPE_WRITE:
+                ((OtherWriteViewHolder) holder).setButtonClickListener(mListener);
                 break;
-            case VIEW_TYPE_REVIEW :
-                ((OtherReviewViewHolder)holder).setData(item.getReviews().get(position-5));
+            case VIEW_TYPE_REVIEW:
+
+                ((OtherReviewViewHolder) holder).setData(item.getReviews().get(position - 5));
+//                ((OtherReviewViewHolder) holder).setName(item2);
+
                 break;
         }
     }

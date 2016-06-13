@@ -39,9 +39,9 @@ public class MyProfileActivity extends AppCompatActivity {
         listView.addHeaderView(header_2);
         listView.addFooterView(footer);
 
-        Button btn_post = (Button)findViewById(R.id.btn_post);
+        Button btn_list = (Button)findViewById(R.id.btn_list);
         Button btn_wish = (Button)findViewById(R.id.btn_wish);
-        btn_post.setOnClickListener(new View.OnClickListener() {
+        btn_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MyProfileActivity.this, MyProductListActivity.class);

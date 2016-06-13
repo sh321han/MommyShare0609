@@ -38,12 +38,12 @@ public class MainFragment extends Fragment {
     MainProductAdapter mAdapter;
 
     List<String> categoryList = new ArrayList<String>();
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter, adapter3;
 
     Spinner spinner1, spinner2, spinner3;
     String category;
 
-    String member_id="123123";
+    String member_id = "123123";
 
 
     public MainFragment() {
@@ -61,9 +61,9 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        spinner1 = (Spinner)view.findViewById(R.id.spinner1);
-        spinner2 = (Spinner)view.findViewById(R.id.spinner2);
-        spinner3 = (Spinner)view.findViewById(R.id.spinner3);
+        spinner1 = (Spinner) view.findViewById(R.id.spinner1);
+        spinner2 = (Spinner) view.findViewById(R.id.spinner2);
+        spinner3 = (Spinner) view.findViewById(R.id.spinner3);
         listView = (RecyclerView) view.findViewById(R.id.main_rv_list);
 
 
@@ -81,13 +81,12 @@ public class MainFragment extends Fragment {
             public void onHeartClick(View view, MainProduct product) {
                 Toast.makeText(getContext(), "찜", Toast.LENGTH_LONG).show();
 
+
                 NetworkManager.getInstance().Keep(product.get_id(), member_id, new NetworkManager.OnResultListener<KeepData>() {
                     @Override
                     public void onSuccess(Request request, KeepData result) {
                         if (result.success.equals("true")) {
-                            Log.d("성공","=====================");
-
-
+                            Log.d("성공", "=====================");
 
 
                         } else {
@@ -114,15 +113,15 @@ public class MainFragment extends Fragment {
         });
 //        setData();
 
-        category = (String)spinner1.getSelectedItem();
+        category = (String) spinner1.getSelectedItem();
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(categoryList!=null) {
+                if (categoryList != null) {
 //                    Toast.makeText(getActivity(), categoryList.get(position), Toast.LENGTH_LONG).show();
                     //수정
-                    if(categoryList.size() != 0) category = categoryList.get(position);
+                    if (categoryList.size() != 0) category = categoryList.get(position);
                     setData(category);
                 }
 
@@ -146,6 +145,16 @@ public class MainFragment extends Fragment {
             }
         });
 
+        adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.dropdown_item);
+
+        adapter3 = new ArrayAdapter<String>(getContext(), R.layout.spinner_item);
+        adapter3.setDropDownViewResource(R.layout.dropdown_item);
+
+        spinner3.setAdapter(adapter3);
+
+        spinner2.setAdapter(adapter);
+
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -158,6 +167,7 @@ public class MainFragment extends Fragment {
             }
         });
 
+       initData();
         return view;
     }
 
@@ -183,19 +193,22 @@ public class MainFragment extends Fragment {
 
             }
         });
+
+
     }
 
-    private void setCategoryList(){
+    private void setCategoryList() {
         NetworkManager.getInstance().getCategoryList(this, new NetworkManager.OnResultListener<List<String>>() {
             @Override
             public void onSuccess(Request request, List<String> result) {
                 categoryList.add("전체");
                 categoryList.addAll(result);
                 categoryList.size();
+
                 //categoryList = result;
 
-                adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categoryList);
-                adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, categoryList);
+                adapter.setDropDownViewResource(R.layout.dropdown_item);
 
                 spinner1.setAdapter(adapter);
             }
@@ -206,5 +219,21 @@ public class MainFragment extends Fragment {
             }
         });
     }
+
+    private void initData() {
+        String[] arrays = getResources().getStringArray(R.array.price_item);
+        for (String s : arrays) {
+            adapter.add(s);
+        }
+
+        String[] arrays3 = getResources().getStringArray(R.array.dist_item);
+        for (String d : arrays3) {
+            adapter3.add(d);
+        }
+
+
+    }
+
+
 
 }

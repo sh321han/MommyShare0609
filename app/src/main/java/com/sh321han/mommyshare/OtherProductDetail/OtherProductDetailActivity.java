@@ -2,6 +2,7 @@ package com.sh321han.mommyshare.OtherProductDetail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +39,8 @@ public class OtherProductDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.before_icon);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setTitleTextColor(Color.parseColor("#f25252"));
+        getSupportActionBar().setTitle("마미셰어");
 
 
 
@@ -103,6 +106,7 @@ public class OtherProductDetailActivity extends AppCompatActivity {
             public void onSuccess(Request request, ProductDetailData result) {
 //                mAdapter.clear();
                 mAdapter.set(result);
+
 
             }
 

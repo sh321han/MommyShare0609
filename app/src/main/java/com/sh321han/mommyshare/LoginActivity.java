@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (token == null) {
                     LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                         @Override
-                        public void onSuccess(LoginResult loginResult) {
+                        public void onSuccess(final LoginResult loginResult) {
                             AccessToken token = AccessToken.getCurrentAccessToken();
                             NetworkManager.getInstance().login(LoginActivity.this, token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<com.sh321han.mommyshare.data.LoginResult>() {
                                 @Override
@@ -60,10 +60,10 @@ public class LoginActivity extends AppCompatActivity {
                                     if (result.getSuccess()) {
                                         if (result.getMessage().equals("OK")) {
                                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
 //                                            SharedPreferences.Editor editor =  mPref.edit();
 //                                            editor.putInt("member_id", result.getResult().getMember_id());
                                                 //editor.commit();
-
 
                                         } else if (result.getMessage().equals("NOTREGISTER")) {
 

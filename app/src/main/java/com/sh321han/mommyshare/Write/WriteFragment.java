@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sh321han.mommyshare.Manager.NetworkManager;
@@ -79,7 +79,7 @@ public class WriteFragment extends Fragment {
         });
 
 
-        Button btn = (Button) getActivity().findViewById(R.id.btn_next);
+        TextView btn = (TextView) getActivity().findViewById(R.id.btn_next);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,5 +167,8 @@ public class WriteFragment extends Fragment {
             }
         });
     }
+
+
+
 
 }

@@ -12,14 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearlayout">
+        android:id="@+id/linearlayout"
+        android:layout_marginTop="16dp">
         <Spinner
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:id="@+id/spinner1"
             android:entries="@array/category_item"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+           />
 
         <Spinner
             android:layout_width="120dp"
@@ -27,7 +29,8 @@
             android:id="@+id/spinner2"
             android:entries="@array/price_item"
             android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            />
 
         <Spinner
             android:layout_width="120dp"

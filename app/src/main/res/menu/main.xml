@@ -8,14 +8,15 @@
         <!--app:showAsAction="never" />-->
 
     <item
+
         android:id="@+id/btn_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/search_icon"
         android:title="search"/>
     <item
         android:id="@+id/btn_chat"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:icon="@drawable/chat_icon"
         app:showAsAction="always"
         android:title="chatting"/>
 

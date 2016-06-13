@@ -17,13 +17,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="160dp"
-        android:layout_height="48dp"
-        android:id="@+id/btn_setpresentLoc"
-        android:layout_alignParentBottom="true"
-        android:text="완료"
-        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
 

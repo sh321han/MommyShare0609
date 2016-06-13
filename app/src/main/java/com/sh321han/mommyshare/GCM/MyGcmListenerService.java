@@ -65,6 +65,8 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "senderid: " + senderid);
         Log.d(TAG, "Title: " + title);
 
+
+
         if (from.startsWith("/topics/")) {
             // message received from some topic.
         } else {
@@ -101,7 +103,27 @@ public class MyGcmListenerService extends GcmListenerService {
         // [START_EXCLUDE]
         /**
          * Production applications would usually process the message here.
-         * Eg: - Syncing with server.
+         * Eg: - Syncing with server.result": [
+         {
+         "message_id": 0,
+         "message": "대화내용",
+         "receiver_id": "2",
+         "sender_id": "1",
+         "_id": "575a22160a03b4ae7c85cd89",
+         "isread": false,
+         "reg_date": "2016-06-10T02:12:38.243Z"
+         },
+         {
+         "message_id": 1,
+         "message": "대화내용",
+         "receiver_id": "2",
+         "sender_id": "1",
+         "_id": "575a22770a03b4ae7c85cd8a",
+         "isread": false,
+         "reg_date": "2016-06-10T02:14:15.541Z"
+         },
+         {
+         "message_id": 2,
          *     - Store message in local database.
          *     - Update UI.
          */

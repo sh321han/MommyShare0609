@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_width="match_parent" android:layout_height="110dp"
     android:background="#e4e9ea"
     android:orientation="vertical"
-    android:layout_marginTop="20dp">
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:background="#d2d7d8"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -21,8 +27,8 @@
         android:layout_marginTop="11dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/pro_c_bg">
+        android:layout_height="48dp"
+        android:background="@drawable/pro_d_bg">
 
 
         <TextView

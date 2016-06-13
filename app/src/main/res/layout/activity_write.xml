@@ -16,15 +16,18 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@drawable/top_bar_bg2"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
 
-            <Button
+            <TextView
                 android:id="@+id/btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:textSize="16dp"
+                android:layout_marginRight="15dp"
+                android:textColor="#878787"
                 android:text="다음" />
 
 
