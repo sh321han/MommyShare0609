@@ -94,6 +94,7 @@ public class SplashActivity extends AppCompatActivity {
                 public void onSuccess(Request request, LoginResult result) {
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     i.putExtra("name", result.getResult().getName());
+
                     startActivity(i);
 //                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
 //                    Log.d("나와라","나왔다 : " + result.getResult().getName());

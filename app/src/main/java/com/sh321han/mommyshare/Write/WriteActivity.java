@@ -24,6 +24,8 @@ public class WriteActivity extends AppCompatActivity {
 
         toolbar.setTitleTextColor(Color.parseColor("#f25252"));
         getSupportActionBar().setTitle("물품등록");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.before_icon);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.container, new WriteFragment()).commit();

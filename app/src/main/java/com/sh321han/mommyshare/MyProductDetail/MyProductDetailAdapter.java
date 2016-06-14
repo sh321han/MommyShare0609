@@ -64,9 +64,9 @@ public class MyProductDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
-//            case VIEW_TYPE_PAGER :
-//                ((MyPagerViewHolder) holder).setData(item);
-//                break;
+            case VIEW_TYPE_PAGER :
+                ((MyPagerViewHolder) holder).setData();
+                break;
             case VIEW_TYPE_DESC:
                 ((MyDescViewHolder) holder).setData(item);
                 break;

@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +42,8 @@ public class MainActivity extends AppCompatActivity
 
         toolbar.setTitleTextColor(Color.parseColor("#f25252"));
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.before_icon);
         getSupportActionBar().setTitle("마미셰어");
 
 
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 //        toggle.setDrawerIndicatorEnabled(false);
-        toggle.setHomeAsUpIndicator(R.drawable.sidemenu_icon);
+
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -94,7 +94,10 @@ public class MainActivity extends AppCompatActivity
         Intent i = getIntent();
         TextView profile_name = (TextView) headerView.findViewById(R.id.pro_name);
         profile_name.setText(i.getStringExtra("name"));
-        Log.d("성공", i.getStringExtra("name"));
+//        String member_id = i.getStringExtra("member_id");
+        Bundle b = new Bundle();
+        b.putString("member_id", i.getStringExtra("member_id"));
+
 
 
         if (savedInstanceState == null) {

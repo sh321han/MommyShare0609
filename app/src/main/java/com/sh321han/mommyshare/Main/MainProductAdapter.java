@@ -17,6 +17,9 @@ import java.util.List;
 public class MainProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<MainProduct> items = new ArrayList<>();
 
+
+
+
     public void clear() {
         items.clear();
         notifyDataSetChanged();

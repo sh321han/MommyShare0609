@@ -255,25 +255,34 @@ public class NetworkManager {
     private static final String PRODUCT_WRITE_URL = MOMMYSHARE_SERVER + "/product/write";
 
     public Request ProductWrite(double longitude, double latitude, String name, String category,
-                                int rent_fee, int rent_deposit, int min_rent_period, int max_rent_period, String content, List<File> pictures,
+                                int rent_fee, int rent_deposit, int min_rent_period, int max_rent_period, String content, int member_id, String location, List<File> mUploadFile,
                                 OnResultListener<WriteData> listener) {
 
         MultipartBody.Builder myBuilder = new MultipartBody.Builder();
-        RequestBody body = new FormBody.Builder()
-                .add("name", name)
-                .add("category", category)
-                .add("rent_fee", rent_fee + "")
-                .add("rent_deposit", rent_deposit + "")
-                .add("min_rent_period", min_rent_period + "")
-                .add("max_rent_period", max_rent_period + "")
-                .add("content", content)
-                .add("longitude", longitude + "")
-                .add("latitude", latitude + "")
+        myBuilder.setType(MultipartBody.FORM)
+                .addFormDataPart("name", name)
+                .addFormDataPart("category", category)
+                .addFormDataPart("rent_fee", rent_fee + "")
+                .addFormDataPart("rent_deposit", rent_deposit + "")
+                .addFormDataPart("min_rent_period", min_rent_period + "")
+                .addFormDataPart("max_rent_period", max_rent_period + "")
+                .addFormDataPart("content", content)
+                .addFormDataPart("longitude", longitude + "")
+                .addFormDataPart("latitude", latitude + "")
+                .addFormDataPart("member_id", member_id+"")
+                .addFormDataPart("location", location);
+
+        for(int i = 0; i < mUploadFile.size(); i++) {
+            myBuilder.addFormDataPart("pictures", mUploadFile.get(i).getName(),
+                    RequestBody.create(MediaType.parse("image/jpeg"), mUploadFile.get(i)));
+        }
+        RequestBody body = myBuilder
                 .build();
 
-        for(int i = 0; i < pictures.size(); i++)
-            myBuilder.addFormDataPart("pictures", pictures.get(i).getName(),
-                    RequestBody.create(MediaType.parse("image/jpeg"), pictures.get(i)));
+
+
+
+
 
 
         Request request = new Request.Builder()

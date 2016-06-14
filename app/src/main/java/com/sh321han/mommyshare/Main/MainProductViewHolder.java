@@ -82,9 +82,16 @@ public class MainProductViewHolder extends RecyclerView.ViewHolder {
     public void setProduct(MainProduct product) {
         this.product = product;
 
+//        if(product.getPicture_name() == null) {
+//
+//        }
+
+//        thumbView.setImageDrawable(ContextCompat.getDrawable(MyApplication.getContext(),R.drawable.defalt_pic));
+
         if (product.getPicture_name().size() != 0) {
             Glide.with(thumbView.getContext()).load(MOMMYSHARE_SERVER + product.getPicture_path() + product.getPicture_name().get(0)).into(thumbView);
         }
+
 
         nameView.setText(product.getName());
         priceView.setText("대여료 " + product.getRent_fee());

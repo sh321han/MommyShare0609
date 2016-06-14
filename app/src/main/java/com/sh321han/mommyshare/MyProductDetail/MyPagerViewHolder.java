@@ -1,48 +1,36 @@
 package com.sh321han.mommyshare.MyProductDetail;
 
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.sh321han.mommyshare.R;
-import com.sh321han.mommyshare.data.MyProductDetailData;
+import com.sh321han.mommyshare.data.ProductDetailData;
 
 /**
  * Created by Tacademy on 2016-05-24.
  */
 public class MyPagerViewHolder extends RecyclerView.ViewHolder {
 
-    PagerAdapter mAdapter;
-    ViewPager pager;
-    MyProductDetailData data;
+    private static final String MOMMYSHARE_SERVER = "http://52.79.57.157:3000";
+    ImageView imageView;
+    ProductDetailData data;
 
     public MyPagerViewHolder(View itemView) {
         super(itemView);
+        imageView = (ImageView) itemView.findViewById(R.id.default_image);
 
-        pager = (ViewPager)itemView.findViewById(R.id.pager);
-        mAdapter = new MyPagerAdapter(itemView.getContext());
-        pager.setAdapter(mAdapter);
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
     }
 
-    public void setData(MyProductDetailData data) {
-        this.data = data;
+    public void setData() {
+
+
+//        imageView.setImageDrawable(ContextCompat.getDrawable(MyApplication.getContext(),R.drawable.defalt_pic));
+
+//        Glide.with(imageView.getContext()).load(MOMMYSHARE_SERVER + data.getPicture_path() + data.getPicture_name().get(0)).into(imageView);
+
+
+
     }
 }

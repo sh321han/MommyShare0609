@@ -30,6 +30,7 @@ import okhttp3.Request;
 public class WriteFragment extends Fragment {
 
     EditText edit_name, edit_price, edit_deposit, edit_max_period, edit_min_period;
+    WriteLocationActivity write = new WriteLocationActivity();
 
     Spinner sp;
 
@@ -38,6 +39,7 @@ public class WriteFragment extends Fragment {
     String category;
     String ok;
     double locX, locY;
+    String address;
 
     private static final int RESULT = 0;
 
@@ -61,6 +63,7 @@ public class WriteFragment extends Fragment {
         edit_deposit = (EditText) v.findViewById(R.id.edit_deposit);
         edit_max_period = (EditText) v.findViewById(R.id.edit_max_period);
         edit_min_period = (EditText) v.findViewById(R.id.edit_min_period);
+
 
         sp = (Spinner) v.findViewById(R.id.spinner);
 
@@ -124,6 +127,10 @@ public class WriteFragment extends Fragment {
                     locY = data.getDoubleExtra(WriteLocationActivity.RESULT_LOCY, locY);
 
 
+                    address = data.getStringExtra(WriteLocationActivity.ADDRESS);
+
+
+
 
                     Bundle b = new Bundle();
                     b.putString("name", edit_name.getText().toString());
@@ -134,6 +141,7 @@ public class WriteFragment extends Fragment {
                     b.putString("category", category.toString());
                     b.putDouble("longitude", locX);
                     b.putDouble("latitude", locY);
+                    b.putString("address", address);
 
                     WriteDetailFragment nextFragment = new WriteDetailFragment();
                     nextFragment.setArguments(b);

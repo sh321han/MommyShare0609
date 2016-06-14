@@ -55,8 +55,11 @@ public class WriteLocationActivity extends AppCompatActivity implements
     GoogleApiClient mClient;
     TextView btn_setPresentLoc;
     double locX, locY;
+    String address;
     public static final String RESULT_LOCX = "result_locX";
     public static final String RESULT_LOCY = "result_locY";
+    public static final String ADDRESS = "result_address";
+
 
 
     @Override
@@ -68,6 +71,9 @@ public class WriteLocationActivity extends AppCompatActivity implements
         toolbar.setTitleTextColor(Color.parseColor("#f25252"));
         getSupportActionBar().setTitle("대여 가능 장소 입력");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.before_icon);
+
+
 
 
         mClient = new GoogleApiClient.Builder(this)
@@ -105,8 +111,9 @@ public class WriteLocationActivity extends AppCompatActivity implements
                 String ok = "ok";
                 Intent intent = new Intent();
                 intent.putExtra("ok", ok);
-                intent.putExtra(RESULT_LOCX, locX);
-                intent.putExtra(RESULT_LOCY, locY);
+                intent.putExtra(RESULT_LOCX, locY);
+                intent.putExtra(RESULT_LOCY, locX);
+                intent.putExtra(ADDRESS, address);
 
                 setResult(RESULT_OK, intent);
 
@@ -171,7 +178,7 @@ public class WriteLocationActivity extends AppCompatActivity implements
 //        addMarker(latLng.latitude, latLng.longitude);
 //    }
 
-//    @Override
+    //    @Override
 //    public void onMapClick(LatLng latLng) {
 //        addMarker(latLng.latitude,latLng.latitude);
 //        Toast.makeText(this,latLng.latitude + latLng.latitude +"",Toast.LENGTH_SHORT).show();
@@ -188,17 +195,16 @@ public class WriteLocationActivity extends AppCompatActivity implements
             options.anchor(0.5f, 1f);
             currentMarker = mMap.addMarker(options);
 
-        options.title("MyMarker");
-        options.snippet("marker description");
+            options.title("MyMarker");
+            options.snippet("marker description");
             options.draggable(true);
             Marker m = mMap.addMarker(options);
         } else {
             MarkerOptions option = new MarkerOptions();
-            option.position(new LatLng(lat,lng));
+            option.position(new LatLng(lat, lng));
             option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-            option.anchor(0.5f,1f);
+            option.anchor(0.5f, 1f);
             currentMarker = mMap.addMarker(option);
-
 
 
         }
@@ -213,7 +219,7 @@ public class WriteLocationActivity extends AppCompatActivity implements
         options.draggable(true);
         Marker m = mMap.addMarker(options);
 
-        }
+    }
 
 
     @Override
@@ -244,7 +250,8 @@ public class WriteLocationActivity extends AppCompatActivity implements
 
                 @Override
                 public void onSuccess(Request request, AddressInfo result) {
-                    Toast.makeText(WriteLocationActivity.this,result.fullAddress,Toast.LENGTH_LONG).show();
+                    Toast.makeText(WriteLocationActivity.this, result.fullAddress, Toast.LENGTH_LONG).show();
+                    address = result.fullAddress;
                 }
 
                 @Override
@@ -257,9 +264,6 @@ public class WriteLocationActivity extends AppCompatActivity implements
             moveMap(location.getLatitude(), location.getLongitude(), 15f);
         }
     }
-
-
-
 
 
     private void moveMap(double lat, double lng, float zoom) {
@@ -314,8 +318,8 @@ public class WriteLocationActivity extends AppCompatActivity implements
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-        addMarker(latLng.latitude,latLng.latitude);
-        Toast.makeText(this,latLng.latitude + latLng.latitude +"",Toast.LENGTH_SHORT).show();
+        addMarker(latLng.latitude, latLng.latitude);
+        Toast.makeText(this, latLng.latitude + latLng.latitude + "", Toast.LENGTH_SHORT).show();
         PropertyManager.getInstance().setXloca(latLng.latitude);
         PropertyManager.getInstance().setYloca(latLng.latitude);
 

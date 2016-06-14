@@ -39,49 +39,49 @@
 
     <ImageButton
         android:id="@+id/btn_camera"
-        android:layout_width="20dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="3dp"
         android:layout_below="@+id/layout"
         android:layout_marginLeft="26dp"
         android:src="@drawable/camera_icon" />
 
     <ImageButton
         android:id="@+id/btn_gallery"
-        android:layout_width="20dp"
-        android:layout_height="18dp"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
         android:layout_below="@+id/layout"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="3dp"
         android:layout_toEndOf="@+id/btn_camera"
         android:layout_toRightOf="@+id/btn_camera"
         android:src="@drawable/gallery_icon" />
 
     <ImageView
         android:id="@+id/image1"
-        android:layout_width="36dp"
-        android:layout_height="24dp"
-        android:layout_alignBottom="@+id/btn_gallery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/layout"
         android:layout_marginLeft="29dp"
-        android:layout_toEndOf="@+id/btn_gallery"
+
         android:layout_toRightOf="@+id/btn_gallery" />
 
     <ImageView
         android:id="@+id/image2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/image1"
+        android:layout_below="@+id/layout"
         android:layout_marginLeft="11dp"
-        android:layout_toEndOf="@+id/image1"
+
         android:layout_toRightOf="@+id/image1" />
 
     <ImageView
         android:id="@+id/image3"
-        android:layout_width="36dp"
-        android:layout_height="24dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignBottom="@+id/image2"
         android:layout_marginLeft="11dp"
-        android:layout_toEndOf="@+id/image2"
+        android:layout_below="@+id/layout"
         android:layout_toRightOf="@+id/image2" />
 
 

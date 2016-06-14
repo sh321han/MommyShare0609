@@ -31,35 +31,40 @@ public class OtherPagerAdapter extends PagerAdapter {
     ImageView imgView;
 
 
-    public void addData(ProductDetailData _data){
+    public void addData(ProductDetailData _data) {
         data = _data;
+        mPicture_name = data.getPicture_name();
         notifyDataSetChanged();
     }
 
     public OtherPagerAdapter(Context context) {
         mContext = context;
-        mPicture_name=new ArrayList<>();
+        mPicture_name = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return 2;
-//        return mPicture_name.size();
+        //return 3;
+        return mPicture_name.size();
     }
-
 
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
         mView = LayoutInflater.from(mContext).inflate(R.layout.viewpager_childview, null);
-        imgView = (ImageView)mView.findViewById(R.id.pager_image);
+        imgView = (ImageView) mView.findViewById(R.id.pager_image);
 
         imgView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Log.d("lllllllooo", position+"");
+
+        Log.d("TEST ", String.valueOf(position));
+//        if(getCount() > position+1) {
+//
+//        }
         Glide.with(mContext).load(MOMMYSHARE_SERVER + data.getPicture_path() + data.getPicture_name().get(position)).into(imgView);
 
-        ((ViewPager)container).addView(mView,0);
+
+        ((ViewPager) container).addView(mView, 0);
 
 //        View view = null;
       /*  ImageView imageView = new ImageView(mContext);
@@ -73,15 +78,13 @@ public class OtherPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager)container).removeView((View)object);
+        ((ViewPager) container).removeView((View) object);
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
-
-
 
 
 }

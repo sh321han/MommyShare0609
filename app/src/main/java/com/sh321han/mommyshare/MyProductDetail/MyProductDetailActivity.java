@@ -1,6 +1,7 @@
 package com.sh321han.mommyshare.MyProductDetail;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +24,7 @@ public class MyProductDetailActivity extends AppCompatActivity {
 
     String name;
     int rent_fee, rent_deposit, min_rent_period, max_rent_period;
-    String content;
+    String content, location;
     String category;
 
     @Override
@@ -34,6 +35,11 @@ public class MyProductDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitleTextColor(Color.parseColor("#f25252"));
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.before_icon);
+        getSupportActionBar().setTitle("내물품 상세페이지");
 
 
         Intent intent = getIntent();
@@ -44,6 +50,8 @@ public class MyProductDetailActivity extends AppCompatActivity {
         min_rent_period = intent.getExtras().getInt("min_rent_period");
         max_rent_period = intent.getExtras().getInt("max_rent_period");
         category = intent.getStringExtra("category");
+        location = intent.getStringExtra("location");
+
         home = intent.getExtras().getInt("home");
 
 
@@ -69,6 +77,7 @@ public class MyProductDetailActivity extends AppCompatActivity {
         data.setMax_rent_period(max_rent_period);
         data.setCategory(category);
         data.setContent(content);
+        data.setLocation(location);
 
         mAdapter.add(data);
 

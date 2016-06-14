@@ -78,15 +78,18 @@ public class MainFragment extends Fragment {
 
         mAdapter.setOnHeartClickListener(new MainProductViewHolder.OnHeartClickListener() {
             @Override
-            public void onHeartClick(View view, MainProduct product) {
+            public void onHeartClick(View view, final MainProduct product) {
                 Toast.makeText(getContext(), "찜", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(getContext(), MyWishListActivity.class);
+//                intent.putExtra("id", product.get_id());
+//                startActivity(intent);
 
 
                 NetworkManager.getInstance().Keep(product.get_id(), member_id, new NetworkManager.OnResultListener<KeepData>() {
                     @Override
                     public void onSuccess(Request request, KeepData result) {
                         if (result.success.equals("true")) {
-                            Log.d("성공", "=====================");
+                            Log.d("성공", product.get_id());
 
 
                         } else {

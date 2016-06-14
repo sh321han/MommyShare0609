@@ -40,7 +40,7 @@ public class OtherProductDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.before_icon);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setTitleTextColor(Color.parseColor("#f25252"));
-        getSupportActionBar().setTitle("마미셰어");
+        getSupportActionBar().setTitle("물품 상세페이지");
 
 
 

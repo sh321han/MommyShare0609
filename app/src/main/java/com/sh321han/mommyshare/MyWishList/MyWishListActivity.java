@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sh321han.mommyshare.MyProductDetail.MyProductDetailActivity;
+import com.sh321han.mommyshare.Main.MainProductAdapter;
 import com.sh321han.mommyshare.OtherProductDetail.OtherProductDetailActivity;
 import com.sh321han.mommyshare.R;
 import com.sh321han.mommyshare.data.WishProduct;
@@ -18,6 +18,8 @@ public class MyWishListActivity extends AppCompatActivity {
 
     RecyclerView listView;
     MyWishListAdapter mAdapter;
+    MainProductAdapter moAdapter;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,20 +42,30 @@ public class MyWishListActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        setData();
+
+//        Intent intent = getIntent();
+//        id = intent.getStringExtra("id");
+//        setData(id);
     }
 
-    private void setData() {
-        for (int i = 0; i < 10; i++) {
-            WishProduct p = new WishProduct();
-            p.setWish_name("Name " + i);
-            p.setWish_price(i);
-            p.setWish_deposit(i);
-            p.setWish_minPeriod(i);
-            p.setWish_maxPeriod(i);
-            mAdapter.add(p);
-        }
-    }
+//    private void setData(String id) {
+//
+//        NetworkManager.getInstance().MainProductList(id, new NetworkManager.OnResultListener<MainProduct>() {
+//            @Override
+//            public void onSuccess(Request request, ProductDetailData result) {
+////                mAdapter.clear();
+//                moAdapter.add(result);
+//
+//
+//            }
+//
+//            @Override
+//            public void onFail(Request request, IOException exception) {
+//
+//            }
+//        });
+//
+//    }
 
 
     @Override

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.sh321han.mommyshare.Manager.NetworkManager;
+import com.sh321han.mommyshare.Manager.PropertyManager;
 import com.sh321han.mommyshare.MyProductDetail.MyProductDetailActivity;
 import com.sh321han.mommyshare.R;
+import com.sh321han.mommyshare.data.LoginResult;
 import com.sh321han.mommyshare.data.WriteData;
 
 import java.io.File;
@@ -46,9 +50,11 @@ public class WriteDetailFragment extends Fragment {
     ImageButton btn_camera, btn_gallery;
     Intent intent1, intent2, intent3;
     int a[] = {0, 0, 0};
+    int member_id;
 
     EditText editText;
     String content;
+
 
 
     private void getImageFromCamera(Intent intent, int a) {
@@ -106,7 +112,7 @@ public class WriteDetailFragment extends Fragment {
 
                 }
             }
-            return;
+
         }
 
         if (requestCode == RC_CAMERA1) {
@@ -121,7 +127,7 @@ public class WriteDetailFragment extends Fragment {
                 a[0] = 1;
 
             }
-            return;
+
         }
 
         if (requestCode == RC_GALLERY2) {
@@ -140,7 +146,7 @@ public class WriteDetailFragment extends Fragment {
 
                 }
             }
-            return;
+
         }
 
         if (requestCode == RC_CAMERA2) {
@@ -155,7 +161,7 @@ public class WriteDetailFragment extends Fragment {
                 a[1] = 1;
 
             }
-            return;
+
         }
 
         if (requestCode == RC_GALLERY3) {
@@ -174,7 +180,7 @@ public class WriteDetailFragment extends Fragment {
 
                 }
             }
-            return;
+
         }
 
         if (requestCode == RC_CAMERA3) {
@@ -189,8 +195,10 @@ public class WriteDetailFragment extends Fragment {
                 a[2]=1;
 
             }
-            return;
+
         }
+
+        Log.d("사진", String.valueOf(mUploadFile.size()));
 
 
     }
@@ -227,6 +235,26 @@ public class WriteDetailFragment extends Fragment {
         final int max_rent_period = getArguments().getInt("max_rent_period");
         final double longitude = getArguments().getDouble("longitude");
         final double latitude = getArguments().getDouble("latitude");
+        final String location = getArguments().getString("address");
+
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        if (token != null) {
+            NetworkManager.getInstance().login(getContext(), token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<LoginResult>() {
+                @Override
+                public void onSuccess(Request request, LoginResult result) {
+
+                    member_id = result.getResult().getMember_id();
+//                    i.putExtra("name", result.getResult().getName());
+
+
+                }
+
+                @Override
+                public void onFail(Request request, IOException exception) {
+
+                }
+            });
+        }
 
 
 
@@ -246,7 +274,7 @@ public class WriteDetailFragment extends Fragment {
 
                 content = editText.getText().toString();
 
-                NetworkManager.getInstance().ProductWrite(longitude, latitude, name, category, rent_fee, rent_deposit, min_rent_period, max_rent_period, content, mUploadFile,
+                NetworkManager.getInstance().ProductWrite(longitude, latitude, name, category, rent_fee, rent_deposit, min_rent_period, max_rent_period, content, member_id, location, mUploadFile,
                         new NetworkManager.OnResultListener<WriteData>() {
                             @Override
                             public void onSuccess(Request request, WriteData result) {
@@ -261,6 +289,8 @@ public class WriteDetailFragment extends Fragment {
                                 i.putExtra("min_rent_period", min_rent_period);
                                 i.putExtra("max_rent_period", max_rent_period);
                                 i.putExtra("home", 1);
+                                i.putExtra("member_id", member_id);
+                                i.putExtra("location", location);
 //                                i.putExtra("pictures", mUploadFile);
                                 startActivity(i);
 

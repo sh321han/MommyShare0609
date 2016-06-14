@@ -17,17 +17,18 @@
 
         <ImageView
             android:id="@+id/image_thumb"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="130dp"
-            android:layout_gravity="center_horizontal|top" />
+            android:layout_gravity="center_horizontal|top"
+            />
 
         <CheckBox
             android:id="@+id/heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="100dp"
             android:button="@drawable/heart_selector"
             android:checked="false" />
 
@@ -36,8 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/rent_icon"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
